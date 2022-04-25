@@ -15,6 +15,9 @@ class CartController extends Controller
                 // $request->user()->cart()->get()
             );
         }
+        $orders = new Order();
+        // return $orders = $orders->with(['items', 'payments', 'customer'])->latest()->first();
+        
         return view('cart.index');
     }
 
@@ -79,6 +82,10 @@ class CartController extends Controller
         
         $orders = new Order();
         $orders = $orders->with(['items', 'payments', 'customer'])->latest()->first();
+        
+        //  $orders->items[0]['price'] = number_format($orders->items[0]['price'], 2);
+        //  $orders->payments[0]['amount'] = number_format($orders->payments[0]['amount'], 2);
+
         return response()->json($orders, 200);
     }
 }
